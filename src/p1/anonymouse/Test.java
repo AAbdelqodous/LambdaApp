@@ -5,25 +5,30 @@ import java.util.Comparator;
 public class Test {
     public static void main(String[] args) {
         // -------------- form 1 ---------------------
-        Comparator<String> stringComparator = new Comparator<String>() {
+        Comparator<String> anonymousComparator = new Comparator<String>() {
             @Override
             public int compare(String o1, String o2) {
                 return o1.compareTo(o2);
             }
         };
         // -------------- form 2 ---------------------
-        Comparator<String> comparator = (String o1, String o2) -> { return o1.compareTo(o2); };
+        Comparator<String> lambdaComparator =
+//                (String o1, String o2) -> { return o1.compareTo(o2); };
+                (o1, o2) -> o1.compareTo(o2);
         // -------------- form 3 ---------------------
-        Comparator<String> comparator1 = Comparator.naturalOrder();
+        Comparator<String> naturalOrderComparator = Comparator.naturalOrder();
 
         System.out.println(getUnicodeOfChar('H'));
         System.out.println(getUnicodeOfChar('W'));
 
-        int comparison = stringComparator.compare("Hello", "World");
+        int anonymousComparison = anonymousComparator.compare("Hello", "World");
+        System.out.println(anonymousComparison);
 
-        int comparison2 = comparator.compare("Hello", "World");
+        int lambdaComparison = lambdaComparator.compare("Hello", "World");
+        System.out.println(lambdaComparison);
 
-        System.out.println(comparison2);
+        int naturalOrderComparison = naturalOrderComparator.compare("Hello", "World");
+        System.out.println(naturalOrderComparison);
     }
 
     private static String getUnicodeCharacterOfChar(char ch) {
